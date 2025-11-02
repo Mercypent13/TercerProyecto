@@ -1,0 +1,10 @@
+.acerca-footer{
+  text-decoration: none;
+  color: hsla(0, 0%, 100%, 0.5);
+  transition: all 0.4s ease-in-out;
+}
+
+.acerca-footer:hover{
+  color: #ffffff;
+  transform: scale(1.02);
+}

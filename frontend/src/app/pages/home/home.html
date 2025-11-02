@@ -1,0 +1,98 @@
+<app-nav-bar></app-nav-bar>
+
+<main class="bg-light d-flex flex-column justify-content-start bg-body" style="padding-top: 40px;">
+  
+  <section class="carousel-full-width">
+    <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+
+        <div class="carousel-item active">
+          <img src="/img/slide 1.png" class="d-block w-100" alt="Pixelarium">
+        </div>
+        <div class="carousel-item">
+          <img src="/img/slider2.png" class="d-block w-100" alt="Fotografia">
+        </div>
+        <div class="carousel-item">
+          <img src="/img/slider3.png" class="d-block w-100" alt="Arte y fotografia">
+        </div>
+        <div class="carousel-item">
+          <img src="/img/slider4.png" class="d-block w-100" alt="Arte">
+        </div>
+      </div>
+
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </section>
+  
+  <section class="container my-5">
+      <h1 class="text-center ft-800 mt-4">Bienvenidoa a <span style="color: #E8871E;">Pixelarium</span> </h1>
+      <p class="text-center text-muted lead px-md-5">
+          <strong>Pixelarium</strong> es tu galería de arte digital y tradicional. Descubre y clasifica una vasta colección de obras de artistas de todo el mundo. Desde <strong>retratos</strong> y <strong>paisajes</strong> hasta piezas <strong>abstractas</strong> y <strong>esculturas</strong>, encuentra inspiración y comparte arte en nuestra plataforma.
+      </p>
+  </section>
+
+  <section class="container my-5 py-4 px-5 bg-white shadow-sm rounded">
+    <h2 class="text-center ft-800 mb-5 text-primary">🏆 Obras Destacadas</h2>
+    
+    @if (topArtworks.length > 0) {
+      <div class="row g-4 justify-content-center">
+        @for (obra of topArtworks; track obra._id) {
+          <div class="col-md-4 col-sm-6">
+            <div class="card h-100 shadow border-2 border-warning">
+              <img [src]="'http://localhost:8080' + obra.url_imagen" 
+                   class="card-img-top" 
+                   [alt]="obra.titulo" 
+                   style="height: 250px; object-fit: contain; padding: 15px;">
+              <div class="card-body">
+                <h5 class="card-title">{{ obra.titulo }}</h5>
+                <p class="card-text text-muted small mb-2">Autor: {{ obra.autor.nombre }}</p>
+                <div class="d-flex align-items-center mb-3">
+                    <i class="bi bi-star-fill text-warning me-1"></i>
+                    <span class="text-warning ft-800 me-2 fs-5">
+                        {{ obra.averageRating | number:'1.1-1' }}
+                    </span>
+                    <span class="text-muted small">/ 5.0</span>
+                </div>
+                <a [routerLink]="['/galeria', obra._id]" class="btn btn-primary w-100">Ver Obra</a>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    } @else {
+      <p class="text-center text-muted">Cargando obras destacadas...</p>
+    }
+  </section>
+
+  <section class="container my-5 py-3">
+    <h2 class="text-center ft-800 mb-4">Explora por Categoría</h2>
+    
+    @if (arrayCategories.length > 0) {
+      <div class="row justify-content-center g-3">
+        @for (category of arrayCategories; track category._id) {
+          <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+            <a [routerLink]="['/galeria']" [queryParams]="{ cat: category.nombre }" 
+              class="card text-center text-decoration-none shadow-sm border h-100 bg-white">
+              <div class="card-body py-3 px-4 categoria-container">
+                <h5 class="card-title mb-1 ft-800 text-dark">{{ category.nombre }}</h5>
+                <p class="card-text text-muted small">{{ category.descripcion }}</p>
+              </div>
+            </a>
+          </div>
+        } 
+        </div>
+    } @else {
+      <p class="text-center text-danger">Cargando categorías o error de conexión con el servidor...</p>
+    }
+  </section>
+
+</main>
+
+<app-footer></app-footer>

@@ -1,0 +1,63 @@
+<app-nav-bar></app-nav-bar>
+
+<main class="bg-light" style="padding-top: 80px; min-height: 80vh;">
+  <div class="container my-5">
+    <h1 class="text-center ft-800 mb-4">Galería Completa</h1>
+    
+    <section class="d-flex flex-wrap justify-content-center gap-2 mb-5">
+      @for (category of arrayCategories; track $index) {
+        <button 
+          (click)="filterByCategory(category.nombre)"
+          class="btn btn-sm ft-800"
+          [ngClass]="{
+              'btn-primary': selectedCategory === category.nombre,
+              'btn-outline-primary': selectedCategory !== category.nombre
+          }"
+          style="border-radius: 20px;">
+          {{ category.nombre }}
+        </button>
+      }
+    </section>
+      
+    @if (isLoading) {
+      <p class="text-center text-muted">Cargando obras...</p>
+    } @else if (artworks.length > 0) {
+        
+      <div class="artwork-grid">
+          
+        @for (obra of artworks; track obra._id) {
+          <a [routerLink]="['/galeria', obra._id]" class="artwork-container text-decoration-none">
+              
+            <img [src]="'http://localhost:8080' + obra.url_imagen" 
+                [alt]="obra.titulo" 
+                class="artwork-image">
+            
+            <div class="artwork-overlay">
+                
+              <div class="overlay-title">{{ obra.titulo }}</div>
+
+              <div class="text-white small">
+                  Autor: {{ obra.autor.nombre }}
+              </div>
+              
+              <hr style="width: 50%; border-color: white; margin: 10px 0;">
+
+              <div class="overlay-rating">
+                <i class="bi bi-star-fill text-warning me-1"></i>
+                {{ obra.averageRating}}/ 5.0
+              </div>
+            </div>
+          </a>
+        }
+      </div>
+      
+      @if (artworks.length === 0) {
+          <p class="text-center text-muted mt-5">No se encontraron obras para la categoría **{{ selectedCategory }}**.</p>
+      }
+    } @else {
+        <p class="text-center text-danger">No se encontraron obras de arte.</p>
+    }
+  </div>
+</main>
+
+<app-footer></app-footer>

@@ -1,0 +1,41 @@
+.login-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f8f9fa;
+    padding: 20px;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 450px;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    background: white;
+}
+
+.header-title {
+    font-weight: 800;
+    color: #E8871E;
+    margin-bottom: 25px;
+}
+
+.btn-primary {
+    background-color: #E8871E; 
+    border-color: #E8871E;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #c9751a; 
+    border-color: #c9751a;
+    transform: translateY(-1px);
+}
+
+.form-control.ng-touched.ng-invalid {
+    border-color: #dc3545; 
+}
+

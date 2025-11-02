@@ -1,0 +1,68 @@
+<app-nav-bar></app-nav-bar>
+
+<main class="login-container">
+    <div class="login-card">
+        <h2 class="text-center header-title">
+            Bienvenido a Pixelarium
+        </h2>
+        <p class="text-center text-muted mb-4">Inicia sesión en tu cuenta de artista.</p>
+
+        <!-- Mensaje de Error -->
+        @if (errorMessage) {
+            <div class="alert alert-danger text-center small mb-3" role="alert">
+                {{ errorMessage }}
+            </div>
+        }
+
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            
+            <!-- Email -->
+            <div class="mb-3">
+                <label for="email" class="form-label">Correo Electrónico</label>
+                <input type="email" id="email" class="form-control" formControlName="correo_electronico" 
+                       placeholder="nombre@ejemplo.com">
+                @if (isInvalid('email')) {
+                    <div class="text-danger small mt-1">
+                        @if (f['email'].errors?.['required']) {
+                            El email es obligatorio.
+                        } @else if (f['email'].errors?.['email']) {
+                            Formato de email inválido.
+                        }
+                    </div>
+                }
+            </div>
+
+            <!-- Contraseña -->
+            <div class="mb-4">
+                <label for="password" class="form-label">Contraseña</label>
+                <input type="password" id="password" class="form-control" formControlName="contrasena"
+                       placeholder="Ingresa tu contraseña">
+                @if (isInvalid('password')) {
+                    <div class="text-danger small mt-1">
+                        La contraseña es obligatoria.
+                    </div>
+                }
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100 ft-800" [disabled]="isLoading || loginForm.invalid">
+                @if (isLoading) {
+                    <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                    Iniciando Sesión...
+                } @else {
+                    Iniciar Sesión
+                }
+            </button>
+        </form>
+
+        <div class="text-center mt-4">
+            <p class="small text-muted">¿No tienes cuenta? 
+                <a [routerLink]="['/registro']" class="text-primary text-decoration-none ft-800">Regístrate aquí</a>
+            </p>
+            <p class="small mt-2">
+                <a href="#" class="text-muted text-decoration-none">¿Olvidaste tu contraseña?</a>
+            </p>
+        </div>
+    </div>
+</main>
+
+<app-footer></app-footer>

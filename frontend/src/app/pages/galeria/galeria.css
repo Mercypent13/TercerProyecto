@@ -1,0 +1,59 @@
+.artwork-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.artwork-container {
+    position: relative;
+    overflow: hidden;
+    height: 300px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+.artwork-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.artwork-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.artwork-container:hover .artwork-overlay {
+    opacity: 1;
+}
+
+.artwork-container:hover .artwork-image {
+    transform: scale(1.05);
+}
+
+.overlay-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.overlay-rating {
+    margin-top: 10px;
+    font-size: 1.1rem;
+}

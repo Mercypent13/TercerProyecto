@@ -1,0 +1,97 @@
+<app-nav-bar></app-nav-bar>
+
+<main class="signup-container mt-5">
+    <div class="signup-card">
+        <h2 class="text-center header-title">
+            Únete a Pixelarium
+        </h2>
+        <p class="text-center text-muted mb-4">Crea tu cuenta para compartir tu arte.</p>
+
+        <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+            
+            <!-- Nombre -->
+            <div class="mb-3">
+                <label for="nombre" class="form-label">Nombre de Usuario</label>
+                <input type="text" id="nombre" class="form-control" formControlName="nombre" 
+                       placeholder="Ej: ArtistaDigital88">
+                @if (isInvalid('nombre')) {
+                    <div class="text-danger small mt-1">
+                        @if (f['nombre'].errors?.['required']) {
+                            El nombre es obligatorio.
+                        } @else if (f['nombre'].errors?.['minlength']) {
+                            Mínimo 3 caracteres.
+                        }
+                    </div>
+                }
+            </div>
+
+            <!-- Email -->
+            <div class="mb-3">
+                <label for="email" class="form-label">Correo Electrónico</label>
+                <input type="email" id="email" class="form-control" formControlName="email" 
+                       placeholder="nombre@ejemplo.com">
+                @if (isInvalid('email')) {
+                    <div class="text-danger small mt-1">
+                        @if (f['email'].errors?.['required']) {
+                            El email es obligatorio.
+                        } @else if (f['email'].errors?.['email']) {
+                            Formato de email inválido.
+                        }
+                    </div>
+                }
+            </div>
+
+            <!-- Contraseña -->
+            <div class="mb-3">
+                <label for="password" class="form-label">Contraseña</label>
+                <input type="password" id="password" class="form-control" formControlName="password"
+                       placeholder="Mínimo 6 caracteres">
+                @if (isInvalid('password')) {
+                    <div class="text-danger small mt-1">
+                        @if (f['password'].errors?.['required']) {
+                            La contraseña es obligatoria.
+                        } @else if (f['password'].errors?.['minlength']) {
+                            Mínimo 6 caracteres.
+                        }
+                    </div>
+                }
+            </div>
+
+            <!-- Confirmar Contraseña -->
+            <div class="mb-4">
+                <label for="confirmPassword" class="form-label">Confirmar Contraseña</label>
+                <input type="password" id="confirmPassword" class="form-control" formControlName="confirmPassword">
+                
+                @if (isInvalid('confirmPassword')) {
+                    <div class="text-danger small mt-1">
+                        La confirmación es obligatoria.
+                    </div>
+                }
+                
+                <!-- Validación de coincidencia a nivel de grupo -->
+                @if (signupForm.errors?.['passwordMismatch'] && (f['confirmPassword'].dirty || f['confirmPassword'].touched)) {
+                    <div class="password-mismatch-alert mt-2">
+                        Las contraseñas no coinciden.
+                    </div>
+                }
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100 ft-800" [disabled]="isLoading || signupForm.invalid">
+                @if (isLoading) {
+                    <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                    Registrando...
+                } @else {
+                    Registrarse
+                }
+            </button>
+        </form>
+
+        <div class="text-center mt-4">
+            <p class="small text-muted">¿Ya tienes cuenta? 
+                <a [routerLink]="['/inicio-sesion']" class="text-primary text-decoration-none ft-800">Inicia Sesión</a>
+            </p>
+        </div>
+    </div>
+</main>
+
+<app-footer></app-footer>

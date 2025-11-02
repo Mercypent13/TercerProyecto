@@ -1,0 +1,26 @@
+.carousel{
+  height: 100vh;
+  overflow: hidden;
+}
+.carousel-full-width {
+    width: 100%;
+}
+
+.card{
+  transition: all 0.3s ease-in-out;
+}
+
+.card:hover{
+  background-color: #f1f1f1;
+  transform: scale(1.02);
+}
+
+.categoria-container{
+  transition: all 0.3s ease-in-out;
+}
+
+.categoria-container:hover{
+  border-radius: 5px;
+  background-color: #f1f1f1;
+  transform: scale(1.02);
+}

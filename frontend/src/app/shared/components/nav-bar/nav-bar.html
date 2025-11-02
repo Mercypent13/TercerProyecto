@@ -1,0 +1,28 @@
+<nav class="navbar navbar-expand-lg fixed-top bg-body-tertiary py-3 px-5 border-bottom shadow-sm">
+  <div class="container-fluid">
+    <a class="navbar-brand ms-5" [routerLink]="['/home']">Pixelarium</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse w-100 justify-content-between ms-2" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" [routerLink]="['/home']">Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/galeria']">Galeria</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/sobre-nosotros']">Sobre nosotros</a>
+        </li>
+      </ul>
+      
+      <form class="me-3">
+        <button class="btn btn-outline-primary me-3" type="button" [routerLink]="['/registro']">Registrate</button>
+        <button class="btn btn btn-outline-secondary" type="button" [routerLink]="['/inicio-sesion']">Iniciar sesion</button>
+      </form>
+    </div>
+
+  </div>
+</nav>
